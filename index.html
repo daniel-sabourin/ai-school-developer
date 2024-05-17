@@ -1,0 +1,61 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Flying ASCII Cats</title>
+    <style>
+        body {
+            margin: 0;
+            overflow: hidden;
+            background-color: #f0f0f0;
+        }
+        .cat {
+            position: absolute;
+            font-family: monospace;
+            white-space: pre;
+            user-select: none;
+        }
+    </style>
+</head>
+<body>
+    <script>
+        const cats = [
+            ` /\_/\
+( o.o )
+ > ^ <`,
+            ` /\_/\
+( o.o )
+ > ^ <`,
+            ` /\_/\
+( o.o )
+ > ^ <`
+        ];
+
+        function createCatElement(cat) {
+            const catElement = document.createElement('div');
+            catElement.className = 'cat';
+            catElement.textContent = cat;
+            document.body.appendChild(catElement);
+            return catElement;
+        }
+
+        function getRandomPosition() {
+            const x = Math.random() * window.innerWidth;
+            const y = Math.random() * window.innerHeight;
+            return { x, y };
+        }
+
+        function animateCat(catElement) {
+            const { x, y } = getRandomPosition();
+            catElement.style.transform = `translate(${x}px, ${y}px)`;
+            setTimeout(() => animateCat(catElement), 2000);
+        }
+
+        cats.forEach(cat => {
+            const catElement = createCatElement(cat);
+            animateCat(catElement);
+        });
+    </script>
+</body>
+</html>
